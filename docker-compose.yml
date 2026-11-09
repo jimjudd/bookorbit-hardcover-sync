@@ -1,0 +1,16 @@
+# ABOUTME: Runs the Bookorbit-Hardcover sync container from the GitHub Container Registry image.
+# ABOUTME: Secrets come from a .env file next to this file; see .env.example.
+services:
+  bookorbit-hardcover-sync:
+    image: ghcr.io/jimjudd/bookorbit-hardcover-sync:latest
+    container_name: bookorbit-hardcover-sync
+    restart: unless-stopped
+    environment:
+      BOOKORBIT_URL: http://192.168.0.10:7080
+      BOOKORBIT_USERNAME: ${BOOKORBIT_USERNAME}
+      BOOKORBIT_PASSWORD: ${BOOKORBIT_PASSWORD}
+      HARDCOVER_API_TOKEN: ${HARDCOVER_API_TOKEN}
+      RUN_TIME: "03:00"
+      TIMEZONE: America/New_York
+      SIMILARITY_THRESHOLD: "85"
+      DRY_RUN: "true"
