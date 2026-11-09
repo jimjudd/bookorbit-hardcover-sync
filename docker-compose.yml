@@ -13,4 +13,4 @@ services:
       RUN_TIME: "03:00"
       TIMEZONE: America/New_York
       SIMILARITY_THRESHOLD: "85"
-      DRY_RUN: "true"
+      DRY_RUN: "false"
