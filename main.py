@@ -2,6 +2,7 @@
 # ABOUTME: Books not owned as an ebook go on a Hardcover list; owned or unwanted books come off it.
 import logging
 import os
+import sys
 import time
 from datetime import datetime, timedelta
 from zoneinfo import ZoneInfo
@@ -293,6 +294,9 @@ def main():
     logging.basicConfig(level=os.environ.get("LOG_LEVEL", "INFO"), format="%(asctime)s %(levelname)s %(message)s")
     logging.getLogger("httpx").setLevel(logging.WARNING)
     cfg = config()
+    if "--once" in sys.argv:
+        run_once(cfg)
+        return
     log.info("Starting (dry_run=%s, daily at %s %s)", cfg["dry_run"], cfg["run_time"], cfg["timezone"])
     run_once(cfg)
     # One loop in one process, so only one sync can run at a time.
