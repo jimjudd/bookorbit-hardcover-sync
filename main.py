@@ -273,6 +273,8 @@ def sync(cfg):
 def run_once(cfg):
     try:
         sync(cfg)
+    except httpx.HTTPError as e:
+        log.error("Sync failed; skipping this run with no list changes: %s %s: %r", e.request.method, e.request.url, e)
     except Exception:
         log.exception("Sync failed; skipping this run with no list changes")
 
